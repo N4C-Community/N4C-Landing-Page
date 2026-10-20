@@ -21,7 +21,7 @@ export const Route = createFileRoute("/freelance/")({
 	head: () =>
 		pageHead(
 			"Freelance",
-			"Info pekerjaan lepas dari sesama mahasiswa ITB Asia Community.",
+			"Info pekerjaan lepas dari sesama mahasiswa N4C Community.",
 		),
 	component: FreelancePage,
 });

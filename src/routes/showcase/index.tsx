@@ -18,7 +18,7 @@ export const Route = createFileRoute("/showcase/")({
 	head: () =>
 		pageHead(
 			"Showcase",
-			"Karya dan project kolaborasi member ITB Asia Community.",
+			"Karya dan project kolaborasi member N4C Community.",
 		),
 	component: ShowcasePage,
 });

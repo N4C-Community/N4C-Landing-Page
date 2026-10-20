@@ -14,18 +14,18 @@ import { Route as R404RouteImport } from './routes/404'
 import { Route as AboutIndexRouteImport } from './routes/about/index'
 import { Route as CaraGabungIndexRouteImport } from './routes/cara-gabung/index'
 import { Route as EventIndexRouteImport } from './routes/event/index'
+import { Route as EventIdRouteImport } from './routes/event/$id'
 import { Route as ForumIndexRouteImport } from './routes/forum/index'
+import { Route as ForumIdRouteImport } from './routes/forum/$id'
 import { Route as FreelanceIndexRouteImport } from './routes/freelance/index'
-import { Route as KolabolatorIndexRouteImport } from './routes/kolabolator/index'
+import { Route as FreelanceIdRouteImport } from './routes/freelance/$id'
+import { Route as KolaboratorIndexRouteImport } from './routes/kolaborator/index'
 import { Route as LombaIndexRouteImport } from './routes/lomba/index'
+import { Route as LombaIdRouteImport } from './routes/lomba/$id'
 import { Route as MemberIndexRouteImport } from './routes/member/index'
+import { Route as MemberIdRouteImport } from './routes/member/$id'
 import { Route as ShowcaseIndexRouteImport } from './routes/showcase/index'
-import { Route as EventIndexIdRouteImport } from './routes/event/index.$id'
-import { Route as ForumIndexIdRouteImport } from './routes/forum/index.$id'
-import { Route as FreelanceIndexIdRouteImport } from './routes/freelance/index.$id'
-import { Route as LombaIndexIdRouteImport } from './routes/lomba/index.$id'
-import { Route as MemberIndexIdRouteImport } from './routes/member/index.$id'
-import { Route as ShowcaseIndexIdRouteImport } from './routes/showcase/index.$id'
+import { Route as ShowcaseIdRouteImport } from './routes/showcase/$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -52,9 +52,19 @@ const EventIndexRoute = EventIndexRouteImport.update({
   path: '/event/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EventIdRoute = EventIdRouteImport.update({
+  id: '/event/$id',
+  path: '/event/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ForumIndexRoute = ForumIndexRouteImport.update({
   id: '/forum/',
   path: '/forum/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForumIdRoute = ForumIdRouteImport.update({
+  id: '/forum/$id',
+  path: '/forum/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FreelanceIndexRoute = FreelanceIndexRouteImport.update({
@@ -62,9 +72,14 @@ const FreelanceIndexRoute = FreelanceIndexRouteImport.update({
   path: '/freelance/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const KolabolatorIndexRoute = KolabolatorIndexRouteImport.update({
-  id: '/kolabolator/',
-  path: '/kolabolator/',
+const FreelanceIdRoute = FreelanceIdRouteImport.update({
+  id: '/freelance/$id',
+  path: '/freelance/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KolaboratorIndexRoute = KolaboratorIndexRouteImport.update({
+  id: '/kolaborator/',
+  path: '/kolaborator/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LombaIndexRoute = LombaIndexRouteImport.update({
@@ -72,9 +87,19 @@ const LombaIndexRoute = LombaIndexRouteImport.update({
   path: '/lomba/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LombaIdRoute = LombaIdRouteImport.update({
+  id: '/lomba/$id',
+  path: '/lomba/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MemberIndexRoute = MemberIndexRouteImport.update({
   id: '/member/',
   path: '/member/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MemberIdRoute = MemberIdRouteImport.update({
+  id: '/member/$id',
+  path: '/member/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShowcaseIndexRoute = ShowcaseIndexRouteImport.update({
@@ -82,173 +107,148 @@ const ShowcaseIndexRoute = ShowcaseIndexRouteImport.update({
   path: '/showcase/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EventIndexIdRoute = EventIndexIdRouteImport.update({
-  id: '/event/index/$id',
-  path: '/event/index/$id',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ForumIndexIdRoute = ForumIndexIdRouteImport.update({
-  id: '/forum/index/$id',
-  path: '/forum/index/$id',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FreelanceIndexIdRoute = FreelanceIndexIdRouteImport.update({
-  id: '/freelance/index/$id',
-  path: '/freelance/index/$id',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LombaIndexIdRoute = LombaIndexIdRouteImport.update({
-  id: '/lomba/index/$id',
-  path: '/lomba/index/$id',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MemberIndexIdRoute = MemberIndexIdRouteImport.update({
-  id: '/member/index/$id',
-  path: '/member/index/$id',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ShowcaseIndexIdRoute = ShowcaseIndexIdRouteImport.update({
-  id: '/showcase/index/$id',
-  path: '/showcase/index/$id',
+const ShowcaseIdRoute = ShowcaseIdRouteImport.update({
+  id: '/showcase/$id',
+  path: '/showcase/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/404': typeof R404Route
+  '/event/$id': typeof EventIdRoute
+  '/forum/$id': typeof ForumIdRoute
+  '/freelance/$id': typeof FreelanceIdRoute
+  '/lomba/$id': typeof LombaIdRoute
+  '/member/$id': typeof MemberIdRoute
+  '/showcase/$id': typeof ShowcaseIdRoute
   '/about/': typeof AboutIndexRoute
   '/cara-gabung/': typeof CaraGabungIndexRoute
   '/event/': typeof EventIndexRoute
   '/forum/': typeof ForumIndexRoute
   '/freelance/': typeof FreelanceIndexRoute
-  '/kolabolator/': typeof KolabolatorIndexRoute
+  '/kolaborator/': typeof KolaboratorIndexRoute
   '/lomba/': typeof LombaIndexRoute
   '/member/': typeof MemberIndexRoute
   '/showcase/': typeof ShowcaseIndexRoute
-  '/event/index/$id': typeof EventIndexIdRoute
-  '/forum/index/$id': typeof ForumIndexIdRoute
-  '/freelance/index/$id': typeof FreelanceIndexIdRoute
-  '/lomba/index/$id': typeof LombaIndexIdRoute
-  '/member/index/$id': typeof MemberIndexIdRoute
-  '/showcase/index/$id': typeof ShowcaseIndexIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/404': typeof R404Route
+  '/event/$id': typeof EventIdRoute
+  '/forum/$id': typeof ForumIdRoute
+  '/freelance/$id': typeof FreelanceIdRoute
+  '/lomba/$id': typeof LombaIdRoute
+  '/member/$id': typeof MemberIdRoute
+  '/showcase/$id': typeof ShowcaseIdRoute
   '/about': typeof AboutIndexRoute
   '/cara-gabung': typeof CaraGabungIndexRoute
   '/event': typeof EventIndexRoute
   '/forum': typeof ForumIndexRoute
   '/freelance': typeof FreelanceIndexRoute
-  '/kolabolator': typeof KolabolatorIndexRoute
+  '/kolaborator': typeof KolaboratorIndexRoute
   '/lomba': typeof LombaIndexRoute
   '/member': typeof MemberIndexRoute
   '/showcase': typeof ShowcaseIndexRoute
-  '/event/index/$id': typeof EventIndexIdRoute
-  '/forum/index/$id': typeof ForumIndexIdRoute
-  '/freelance/index/$id': typeof FreelanceIndexIdRoute
-  '/lomba/index/$id': typeof LombaIndexIdRoute
-  '/member/index/$id': typeof MemberIndexIdRoute
-  '/showcase/index/$id': typeof ShowcaseIndexIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/404': typeof R404Route
+  '/event/$id': typeof EventIdRoute
+  '/forum/$id': typeof ForumIdRoute
+  '/freelance/$id': typeof FreelanceIdRoute
+  '/lomba/$id': typeof LombaIdRoute
+  '/member/$id': typeof MemberIdRoute
+  '/showcase/$id': typeof ShowcaseIdRoute
   '/about/': typeof AboutIndexRoute
   '/cara-gabung/': typeof CaraGabungIndexRoute
   '/event/': typeof EventIndexRoute
   '/forum/': typeof ForumIndexRoute
   '/freelance/': typeof FreelanceIndexRoute
-  '/kolabolator/': typeof KolabolatorIndexRoute
+  '/kolaborator/': typeof KolaboratorIndexRoute
   '/lomba/': typeof LombaIndexRoute
   '/member/': typeof MemberIndexRoute
   '/showcase/': typeof ShowcaseIndexRoute
-  '/event/index/$id': typeof EventIndexIdRoute
-  '/forum/index/$id': typeof ForumIndexIdRoute
-  '/freelance/index/$id': typeof FreelanceIndexIdRoute
-  '/lomba/index/$id': typeof LombaIndexIdRoute
-  '/member/index/$id': typeof MemberIndexIdRoute
-  '/showcase/index/$id': typeof ShowcaseIndexIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/404'
+    | '/event/$id'
+    | '/forum/$id'
+    | '/freelance/$id'
+    | '/lomba/$id'
+    | '/member/$id'
+    | '/showcase/$id'
     | '/about/'
     | '/cara-gabung/'
     | '/event/'
     | '/forum/'
     | '/freelance/'
-    | '/kolabolator/'
+    | '/kolaborator/'
     | '/lomba/'
     | '/member/'
     | '/showcase/'
-    | '/event/index/$id'
-    | '/forum/index/$id'
-    | '/freelance/index/$id'
-    | '/lomba/index/$id'
-    | '/member/index/$id'
-    | '/showcase/index/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/404'
+    | '/event/$id'
+    | '/forum/$id'
+    | '/freelance/$id'
+    | '/lomba/$id'
+    | '/member/$id'
+    | '/showcase/$id'
     | '/about'
     | '/cara-gabung'
     | '/event'
     | '/forum'
     | '/freelance'
-    | '/kolabolator'
+    | '/kolaborator'
     | '/lomba'
     | '/member'
     | '/showcase'
-    | '/event/index/$id'
-    | '/forum/index/$id'
-    | '/freelance/index/$id'
-    | '/lomba/index/$id'
-    | '/member/index/$id'
-    | '/showcase/index/$id'
   id:
     | '__root__'
     | '/'
     | '/404'
+    | '/event/$id'
+    | '/forum/$id'
+    | '/freelance/$id'
+    | '/lomba/$id'
+    | '/member/$id'
+    | '/showcase/$id'
     | '/about/'
     | '/cara-gabung/'
     | '/event/'
     | '/forum/'
     | '/freelance/'
-    | '/kolabolator/'
+    | '/kolaborator/'
     | '/lomba/'
     | '/member/'
     | '/showcase/'
-    | '/event/index/$id'
-    | '/forum/index/$id'
-    | '/freelance/index/$id'
-    | '/lomba/index/$id'
-    | '/member/index/$id'
-    | '/showcase/index/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   R404Route: typeof R404Route
+  EventIdRoute: typeof EventIdRoute
+  ForumIdRoute: typeof ForumIdRoute
+  FreelanceIdRoute: typeof FreelanceIdRoute
+  LombaIdRoute: typeof LombaIdRoute
+  MemberIdRoute: typeof MemberIdRoute
+  ShowcaseIdRoute: typeof ShowcaseIdRoute
   AboutIndexRoute: typeof AboutIndexRoute
   CaraGabungIndexRoute: typeof CaraGabungIndexRoute
   EventIndexRoute: typeof EventIndexRoute
   ForumIndexRoute: typeof ForumIndexRoute
   FreelanceIndexRoute: typeof FreelanceIndexRoute
-  KolabolatorIndexRoute: typeof KolabolatorIndexRoute
+  KolaboratorIndexRoute: typeof KolaboratorIndexRoute
   LombaIndexRoute: typeof LombaIndexRoute
   MemberIndexRoute: typeof MemberIndexRoute
   ShowcaseIndexRoute: typeof ShowcaseIndexRoute
-  EventIndexIdRoute: typeof EventIndexIdRoute
-  ForumIndexIdRoute: typeof ForumIndexIdRoute
-  FreelanceIndexIdRoute: typeof FreelanceIndexIdRoute
-  LombaIndexIdRoute: typeof LombaIndexIdRoute
-  MemberIndexIdRoute: typeof MemberIndexIdRoute
-  ShowcaseIndexIdRoute: typeof ShowcaseIndexIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -288,11 +288,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/event/$id': {
+      id: '/event/$id'
+      path: '/event/$id'
+      fullPath: '/event/$id'
+      preLoaderRoute: typeof EventIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/forum/': {
       id: '/forum/'
       path: '/forum'
       fullPath: '/forum/'
       preLoaderRoute: typeof ForumIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/forum/$id': {
+      id: '/forum/$id'
+      path: '/forum/$id'
+      fullPath: '/forum/$id'
+      preLoaderRoute: typeof ForumIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/freelance/': {
@@ -302,11 +316,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FreelanceIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/kolabolator/': {
-      id: '/kolabolator/'
-      path: '/kolabolator'
-      fullPath: '/kolabolator/'
-      preLoaderRoute: typeof KolabolatorIndexRouteImport
+    '/freelance/$id': {
+      id: '/freelance/$id'
+      path: '/freelance/$id'
+      fullPath: '/freelance/$id'
+      preLoaderRoute: typeof FreelanceIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kolaborator/': {
+      id: '/kolaborator/'
+      path: '/kolaborator'
+      fullPath: '/kolaborator/'
+      preLoaderRoute: typeof KolaboratorIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lomba/': {
@@ -316,11 +337,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LombaIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lomba/$id': {
+      id: '/lomba/$id'
+      path: '/lomba/$id'
+      fullPath: '/lomba/$id'
+      preLoaderRoute: typeof LombaIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/member/': {
       id: '/member/'
       path: '/member'
       fullPath: '/member/'
       preLoaderRoute: typeof MemberIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/member/$id': {
+      id: '/member/$id'
+      path: '/member/$id'
+      fullPath: '/member/$id'
+      preLoaderRoute: typeof MemberIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/showcase/': {
@@ -330,46 +365,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShowcaseIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/event/index/$id': {
-      id: '/event/index/$id'
-      path: '/event/index/$id'
-      fullPath: '/event/index/$id'
-      preLoaderRoute: typeof EventIndexIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/forum/index/$id': {
-      id: '/forum/index/$id'
-      path: '/forum/index/$id'
-      fullPath: '/forum/index/$id'
-      preLoaderRoute: typeof ForumIndexIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/freelance/index/$id': {
-      id: '/freelance/index/$id'
-      path: '/freelance/index/$id'
-      fullPath: '/freelance/index/$id'
-      preLoaderRoute: typeof FreelanceIndexIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/lomba/index/$id': {
-      id: '/lomba/index/$id'
-      path: '/lomba/index/$id'
-      fullPath: '/lomba/index/$id'
-      preLoaderRoute: typeof LombaIndexIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/member/index/$id': {
-      id: '/member/index/$id'
-      path: '/member/index/$id'
-      fullPath: '/member/index/$id'
-      preLoaderRoute: typeof MemberIndexIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/showcase/index/$id': {
-      id: '/showcase/index/$id'
-      path: '/showcase/index/$id'
-      fullPath: '/showcase/index/$id'
-      preLoaderRoute: typeof ShowcaseIndexIdRouteImport
+    '/showcase/$id': {
+      id: '/showcase/$id'
+      path: '/showcase/$id'
+      fullPath: '/showcase/$id'
+      preLoaderRoute: typeof ShowcaseIdRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -378,21 +378,21 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   R404Route: R404Route,
+  EventIdRoute: EventIdRoute,
+  ForumIdRoute: ForumIdRoute,
+  FreelanceIdRoute: FreelanceIdRoute,
+  LombaIdRoute: LombaIdRoute,
+  MemberIdRoute: MemberIdRoute,
+  ShowcaseIdRoute: ShowcaseIdRoute,
   AboutIndexRoute: AboutIndexRoute,
   CaraGabungIndexRoute: CaraGabungIndexRoute,
   EventIndexRoute: EventIndexRoute,
   ForumIndexRoute: ForumIndexRoute,
   FreelanceIndexRoute: FreelanceIndexRoute,
-  KolabolatorIndexRoute: KolabolatorIndexRoute,
+  KolaboratorIndexRoute: KolaboratorIndexRoute,
   LombaIndexRoute: LombaIndexRoute,
   MemberIndexRoute: MemberIndexRoute,
   ShowcaseIndexRoute: ShowcaseIndexRoute,
-  EventIndexIdRoute: EventIndexIdRoute,
-  ForumIndexIdRoute: ForumIndexIdRoute,
-  FreelanceIndexIdRoute: FreelanceIndexIdRoute,
-  LombaIndexIdRoute: LombaIndexIdRoute,
-  MemberIndexIdRoute: MemberIndexIdRoute,
-  ShowcaseIndexIdRoute: ShowcaseIndexIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -25,7 +25,7 @@ export const Route = createFileRoute("/forum/")({
 	head: () =>
 		pageHead(
 			"Forum",
-			"Diskusi mahasiswa lintas jurusan di ITB Asia Community.",
+			"Diskusi mahasiswa lintas jurusan di N4C Community.",
 		),
 	component: ForumPage,
 });

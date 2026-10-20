@@ -18,12 +18,12 @@ function initials(nama: string): string {
 		.toUpperCase();
 }
 
-export const Route = createFileRoute("/member/index/$id")({
+export const Route = createFileRoute("/member/$id")({
 	head: ({ params }) => {
 		const item = memberList.find((entry) => entry.id === params.id);
 		return pageHead(
 			item?.nama ?? "Member tidak ditemukan",
-			item?.bio ?? "Profil member ITB Asia Community.",
+			item?.bio ?? "Profil member N4C Community.",
 		);
 	},
 	component: MemberDetailPage,

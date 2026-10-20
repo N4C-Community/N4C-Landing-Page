@@ -1,40 +1,42 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
 import { ErrorState } from "@/components/shared/ErrorState";
 import { PageShell } from "@/components/shared/PageShell";
 import { ShareButton } from "@/components/shared/ShareButton";
 import { Tag } from "@/components/shared/Tag";
-import { forumList, useForumById } from "@/lib/queries";
+import { showcaseList, useShowcaseById } from "@/lib/queries";
 import { pageHead } from "@/lib/seo";
 
-export const Route = createFileRoute("/forum/index/$id")({
+export const Route = createFileRoute("/showcase/$id")({
 	head: ({ params }) => {
-		const item = forumList.find((entry) => entry.id === params.id);
+		const item = showcaseList.find((entry) => entry.id === params.id);
 		return pageHead(
-			item?.judul ?? "Thread tidak ditemukan",
-			item?.isi ?? "Detail thread forum ITB Asia Community.",
+			item?.judul ?? "Project tidak ditemukan",
+			item?.deskripsi ?? "Detail showcase N4C Community.",
+			item?.gambar,
 		);
 	},
-	component: ForumDetailPage,
+	component: ShowcaseDetailPage,
 });
 
-function ForumDetailPage() {
+function ShowcaseDetailPage() {
 	const { id } = Route.useParams();
-	const query = useForumById(id);
+	const query = useShowcaseById(id);
 	const item = query.data;
 
 	if (query.isLoading) {
 		return (
 			<PageShell title="Memuat...">
-				<p className="text-sm text-muted-foreground">Memuat thread...</p>
+				<p className="text-sm text-muted-foreground">Memuat project...</p>
 			</PageShell>
 		);
 	}
 
 	if (query.isError) {
 		return (
-			<PageShell title="Forum">
+			<PageShell title="Showcase">
 				<ErrorState onRetry={() => void query.refetch()} />
 			</PageShell>
 		);
@@ -44,7 +46,7 @@ function ForumDetailPage() {
 		return (
 			<PageShell title="Tidak ditemukan">
 				<ErrorState
-					title="Thread tidak ditemukan"
+					title="Project tidak ditemukan"
 					description="Item ini tidak ada di data dummy."
 				/>
 			</PageShell>
@@ -54,36 +56,43 @@ function ForumDetailPage() {
 	return (
 		<PageShell
 			title={item.judul}
+			description={item.deskripsi}
 			actions={<ShareButton title={item.judul} />}
 		>
 			<Card>
-				<CardHeader>
+				<img
+					src={item.gambar}
+					alt={item.judul}
+					className="aspect-video w-full object-cover"
+				/>
+				<CardContent className="space-y-4 pt-6">
+					<Badge variant="secondary">{item.kategori}</Badge>
 					<p className="text-sm text-muted-foreground">
-						Oleh{" "}
+						Pembuat{" "}
 						<Link
 							to="/member/$id"
-							params={{ id: item.author }}
+							params={{ id: item.pembuat }}
 							className="underline-offset-4 hover:underline"
 						>
-							{item.authorNama}
+							{item.pembuatNama}
 						</Link>
-						{" · "}
-						{item.replyCount} reply
 					</p>
-				</CardHeader>
-				<CardContent className="space-y-4">
-					<p className="text-sm leading-relaxed">{item.isi}</p>
+					<p className="text-sm leading-relaxed">{item.deskripsi}</p>
 					<div className="flex flex-wrap gap-1">
 						{item.tag.map((tag) => (
 							<Tag key={tag} label={tag} />
 						))}
 					</div>
-					<div className="rounded-lg border border-dashed border-border px-4 py-6 text-sm text-muted-foreground">
-						Reply coming soon
+					<div className="flex flex-wrap gap-2">
+						<Button asChild>
+							<a href={item.link} target="_blank" rel="noreferrer">
+								Lihat project
+							</a>
+						</Button>
+						<Button asChild variant="outline">
+							<Link to="/showcase">Kembali ke list</Link>
+						</Button>
 					</div>
-					<Button asChild variant="outline">
-						<Link to="/forum">Kembali ke list</Link>
-					</Button>
 				</CardContent>
 			</Card>
 		</PageShell>

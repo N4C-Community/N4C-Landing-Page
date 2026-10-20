@@ -1,38 +1,38 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Countdown } from "@/components/shared/Countdown";
 import { ErrorState } from "@/components/shared/ErrorState";
 import { PageShell } from "@/components/shared/PageShell";
 import { ShareButton } from "@/components/shared/ShareButton";
 import { Tag } from "@/components/shared/Tag";
-import { freelanceList, useFreelanceById } from "@/lib/queries";
+import { lombaList, useLombaById } from "@/lib/queries";
 import { pageHead } from "@/lib/seo";
 import { formatDate } from "@/lib/utils";
 
-export const Route = createFileRoute("/freelance/index/$id")({
+export const Route = createFileRoute("/lomba/$id")({
 	head: ({ params }) => {
-		const item = freelanceList.find((entry) => entry.id === params.id);
+		const item = lombaList.find((entry) => entry.id === params.id);
 		return pageHead(
-			item?.judul ?? "Freelance tidak ditemukan",
-			item?.deskripsi ?? "Detail pekerjaan lepas ITB Asia Community.",
+			item?.judul ?? "Lomba tidak ditemukan",
+			item?.deskripsi ?? "Detail lomba N4C Community.",
 			item?.gambar,
 		);
 	},
-	component: FreelanceDetailPage,
+	component: LombaDetailPage,
 });
 
-function FreelanceDetailPage() {
+function LombaDetailPage() {
 	const { id } = Route.useParams();
-	const query = useFreelanceById(id);
+	const query = useLombaById(id);
 	const item = query.data;
 
 	if (query.isLoading) {
 		return (
 			<PageShell title="Memuat...">
 				<p className="text-sm text-muted-foreground">
-					Memuat detail freelance...
+					Memuat detail lomba...
 				</p>
 			</PageShell>
 		);
@@ -40,7 +40,7 @@ function FreelanceDetailPage() {
 
 	if (query.isError) {
 		return (
-			<PageShell title="Freelance">
+			<PageShell title="Lomba">
 				<ErrorState onRetry={() => void query.refetch()} />
 			</PageShell>
 		);
@@ -50,7 +50,7 @@ function FreelanceDetailPage() {
 		return (
 			<PageShell title="Tidak ditemukan">
 				<ErrorState
-					title="Freelance tidak ditemukan"
+					title="Lomba tidak ditemukan"
 					description="Item ini tidak ada di data dummy."
 				/>
 			</PageShell>
@@ -71,9 +71,11 @@ function FreelanceDetailPage() {
 				/>
 				<CardHeader className="flex flex-row flex-wrap items-center gap-2 pt-5">
 					<Badge variant="secondary">{item.kategori}</Badge>
-					<CardTitle className="sr-only">{item.judul}</CardTitle>
 				</CardHeader>
 				<CardContent className="space-y-4 pb-6">
+					<p className="text-sm text-muted-foreground">
+						Penyelenggara: {item.penyelenggara}
+					</p>
 					<p className="text-sm leading-relaxed">{item.deskripsi}</p>
 					<p className="text-sm text-muted-foreground">
 						Deadline {formatDate(item.deadline)} ·{" "}
@@ -86,16 +88,12 @@ function FreelanceDetailPage() {
 					</div>
 					<div className="flex flex-wrap gap-2 pt-2">
 						<Button asChild>
-							<a
-								href={`https://wa.me/${item.kontak}`}
-								target="_blank"
-								rel="noreferrer"
-							>
-								Chat via WhatsApp
+							<a href={item.link} target="_blank" rel="noreferrer">
+								Daftar
 							</a>
 						</Button>
 						<Button asChild variant="outline">
-							<Link to="/freelance">Kembali ke list</Link>
+							<Link to="/lomba">Kembali ke list</Link>
 						</Button>
 					</div>
 				</CardContent>

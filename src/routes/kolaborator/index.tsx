@@ -30,7 +30,7 @@ function initials(nama: string): string {
 		.toUpperCase();
 }
 
-export const Route = createFileRoute("/kolabolator/")({
+export const Route = createFileRoute("/kolaborator/")({
 	head: () =>
 		pageHead(
 			"Cari Kolaborator",

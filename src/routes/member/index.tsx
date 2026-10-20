@@ -26,7 +26,7 @@ function initials(nama: string): string {
 
 export const Route = createFileRoute("/member/")({
 	head: () =>
-		pageHead("Member", "Mahasiswa lintas jurusan di ITB Asia Community."),
+		pageHead("Member", "Mahasiswa lintas jurusan di N4C Community."),
 	component: MemberPage,
 });
 

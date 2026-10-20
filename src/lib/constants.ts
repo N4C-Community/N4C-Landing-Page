@@ -1,7 +1,7 @@
 export const WA_GROUP_LINK = "https://chat.whatsapp.com/XXXXXXXXXXXXX";
-export const COMMUNITY_NAME = "ITB Asia Community";
+export const COMMUNITY_NAME = "N4C Community";
 export const TAGLINE = "Kolaborasi Mahasiswa Lintas Jurusan";
-export const KAMPUS = "ITB Asia Malang";
+export const KAMPUS = "N4C Malang";
 export const DUMMY_PARTNER_COUNT = 8;
 export const SITE_URL = "https://itbasia.community";
 export const OG_IMAGE =
