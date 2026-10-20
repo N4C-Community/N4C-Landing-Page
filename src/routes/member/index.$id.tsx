@@ -18,7 +18,7 @@ function initials(nama: string): string {
 		.toUpperCase();
 }
 
-export const Route = createFileRoute("/member/$id")({
+export const Route = createFileRoute("/member/index/$id")({
 	head: ({ params }) => {
 		const item = memberList.find((entry) => entry.id === params.id);
 		return pageHead(

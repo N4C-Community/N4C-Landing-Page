@@ -12,38 +12,37 @@ import { SortSelect } from "@/components/shared/SortSelect";
 import { StaggerGrid } from "@/components/shared/StaggerGrid";
 import { Tag } from "@/components/shared/Tag";
 import { useSearch } from "@/hooks/useSearch";
-import { useFreelance } from "@/lib/queries";
+import { useLomba } from "@/lib/queries";
 import { pageHead } from "@/lib/seo";
-import type { Freelance } from "@/lib/types";
+import type { Lomba } from "@/lib/types";
 import { formatDate } from "@/lib/utils";
 
-export const Route = createFileRoute("/freelance")({
+export const Route = createFileRoute("/lomba/")({
 	head: () =>
 		pageHead(
-			"Freelance",
-			"Info pekerjaan lepas dari sesama mahasiswa ITB Asia Community.",
+			"Lomba",
+			"Kompetisi desain, bisnis, dan teknologi untuk mahasiswa.",
 		),
-	component: FreelancePage,
+	component: LombaPage,
 });
 
-function FreelancePage() {
-	const query = useFreelance();
+function LombaPage() {
+	const query = useLomba();
 	const data = query.data ?? [];
 	const search = useSearch(data, {
 		searchKeys: ["judul", "deskripsi"],
 		filterKey: "kategori",
 		sortFns: {
-			terbaru: (a: Freelance, b: Freelance) => b.id.localeCompare(a.id),
-			deadline: (a: Freelance, b: Freelance) =>
-				a.deadline.localeCompare(b.deadline),
+			deadline: (a: Lomba, b: Lomba) => a.deadline.localeCompare(b.deadline),
+			terbaru: (a: Lomba, b: Lomba) => b.id.localeCompare(a.id),
 		},
-		defaultSort: "terbaru",
+		defaultSort: "deadline",
 	});
 
 	return (
 		<PageShell
-			title="Freelance"
-			description="Pekerjaan lepas dari komunitas. Cari, filter, dan urutkan deadline."
+			title="Lomba"
+			description="Kompetisi yang relevan untuk mahasiswa lintas jurusan."
 		>
 			<FilterToolbar>
 				<SearchBar value={search.query} onChange={search.setQuery} />
@@ -56,8 +55,8 @@ function FreelancePage() {
 					value={search.sort}
 					onChange={search.setSort}
 					options={[
-						{ value: "terbaru", label: "Terbaru" },
 						{ value: "deadline", label: "Deadline terdekat" },
+						{ value: "terbaru", label: "Terbaru" },
 					]}
 				/>
 			</FilterToolbar>
@@ -67,7 +66,7 @@ function FreelancePage() {
 				<ErrorState onRetry={() => void query.refetch()} />
 			) : search.total === 0 ? (
 				<EmptyState
-					description="Tidak ada freelance yang cocok dengan pencarian."
+					description="Tidak ada lomba yang cocok."
 					ctaLabel="Reset filter"
 					onCta={() => {
 						search.setQuery("");
@@ -80,7 +79,7 @@ function FreelancePage() {
 						{search.results.map((item) => (
 							<Link
 								key={item.id}
-								to="/freelance/$id"
+								to="/lomba/$id"
 								params={{ id: item.id }}
 								className="block h-full"
 							>
@@ -104,8 +103,8 @@ function FreelancePage() {
 										</CardTitle>
 									</CardHeader>
 									<CardContent className="mt-auto space-y-3 pb-5">
-										<p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">
-											{item.deskripsi}
+										<p className="text-sm leading-relaxed text-muted-foreground">
+											{item.penyelenggara}
 										</p>
 										<div className="flex flex-wrap gap-1.5">
 											{item.tag.map((tag) => (

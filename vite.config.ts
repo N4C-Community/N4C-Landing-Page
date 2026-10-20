@@ -14,14 +14,13 @@ export default defineConfig({
 		}),
 		tailwindcss(),
 		react(),
-		babel({ presets: [reactCompilerPreset()] }),
+		babel({
+			presets: [reactCompilerPreset()],
+		}),
 	],
 	resolve: {
 		alias: {
 			"@": path.resolve(import.meta.dirname, "./src"),
 		},
-	},
-	server: {
-		allowedHosts: [".monkeycode-ai.live"],
 	},
 });

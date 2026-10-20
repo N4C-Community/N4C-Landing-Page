@@ -11,7 +11,7 @@ import { lombaList, useLombaById } from "@/lib/queries";
 import { pageHead } from "@/lib/seo";
 import { formatDate } from "@/lib/utils";
 
-export const Route = createFileRoute("/lomba/$id")({
+export const Route = createFileRoute("/lomba/index/$id")({
 	head: ({ params }) => {
 		const item = lombaList.find((entry) => entry.id === params.id);
 		return pageHead(

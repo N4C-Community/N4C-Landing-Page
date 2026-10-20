@@ -24,7 +24,7 @@ function initials(nama: string): string {
 		.toUpperCase();
 }
 
-export const Route = createFileRoute("/member")({
+export const Route = createFileRoute("/member/")({
 	head: () =>
 		pageHead("Member", "Mahasiswa lintas jurusan di ITB Asia Community."),
 	component: MemberPage,

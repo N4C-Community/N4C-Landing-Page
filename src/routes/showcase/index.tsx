@@ -8,41 +8,33 @@ import { FilterToolbar } from "@/components/shared/FilterToolbar";
 import { PageShell } from "@/components/shared/PageShell";
 import { Pagination } from "@/components/shared/Pagination";
 import { SearchBar } from "@/components/shared/SearchBar";
-import { SortSelect } from "@/components/shared/SortSelect";
 import { StaggerGrid } from "@/components/shared/StaggerGrid";
 import { Tag } from "@/components/shared/Tag";
 import { useSearch } from "@/hooks/useSearch";
-import { useLomba } from "@/lib/queries";
+import { useShowcase } from "@/lib/queries";
 import { pageHead } from "@/lib/seo";
-import type { Lomba } from "@/lib/types";
-import { formatDate } from "@/lib/utils";
 
-export const Route = createFileRoute("/lomba")({
+export const Route = createFileRoute("/showcase/")({
 	head: () =>
 		pageHead(
-			"Lomba",
-			"Kompetisi desain, bisnis, dan teknologi untuk mahasiswa.",
+			"Showcase",
+			"Karya dan project kolaborasi member ITB Asia Community.",
 		),
-	component: LombaPage,
+	component: ShowcasePage,
 });
 
-function LombaPage() {
-	const query = useLomba();
+function ShowcasePage() {
+	const query = useShowcase();
 	const data = query.data ?? [];
 	const search = useSearch(data, {
 		searchKeys: ["judul", "deskripsi"],
 		filterKey: "kategori",
-		sortFns: {
-			deadline: (a: Lomba, b: Lomba) => a.deadline.localeCompare(b.deadline),
-			terbaru: (a: Lomba, b: Lomba) => b.id.localeCompare(a.id),
-		},
-		defaultSort: "deadline",
 	});
 
 	return (
 		<PageShell
-			title="Lomba"
-			description="Kompetisi yang relevan untuk mahasiswa lintas jurusan."
+			title="Showcase"
+			description="Project member komunitas. Filter kategori dan lihat detail karyanya."
 		>
 			<FilterToolbar>
 				<SearchBar value={search.query} onChange={search.setQuery} />
@@ -51,14 +43,6 @@ function LombaPage() {
 					value={search.category}
 					onChange={search.setCategory}
 				/>
-				<SortSelect
-					value={search.sort}
-					onChange={search.setSort}
-					options={[
-						{ value: "deadline", label: "Deadline terdekat" },
-						{ value: "terbaru", label: "Terbaru" },
-					]}
-				/>
 			</FilterToolbar>
 			{query.isLoading ? (
 				<CardSkeleton />
@@ -66,7 +50,7 @@ function LombaPage() {
 				<ErrorState onRetry={() => void query.refetch()} />
 			) : search.total === 0 ? (
 				<EmptyState
-					description="Tidak ada lomba yang cocok."
+					description="Tidak ada project yang cocok."
 					ctaLabel="Reset filter"
 					onCta={() => {
 						search.setQuery("");
@@ -79,7 +63,7 @@ function LombaPage() {
 						{search.results.map((item) => (
 							<Link
 								key={item.id}
-								to="/lomba/$id"
+								to="/showcase/$id"
 								params={{ id: item.id }}
 								className="block h-full"
 							>
@@ -89,22 +73,17 @@ function LombaPage() {
 										alt={item.judul}
 										className="aspect-[16/10] w-full object-cover"
 									/>
-									<CardHeader className="gap-2 pt-4">
-										<div className="flex items-center justify-between gap-3">
-											<span className="text-[11px] font-medium tracking-wide text-muted-foreground uppercase">
-												{item.kategori}
-											</span>
-											<span className="text-xs tabular-nums text-muted-foreground">
-												{formatDate(item.deadline)}
-											</span>
-										</div>
-										<CardTitle className="line-clamp-2 text-[15px] leading-snug">
+									<CardHeader className="gap-1.5 pt-4">
+										<CardTitle className="line-clamp-1 text-[15px] leading-snug">
 											{item.judul}
 										</CardTitle>
+										<p className="text-xs text-muted-foreground">
+											{item.pembuatNama}
+										</p>
 									</CardHeader>
 									<CardContent className="mt-auto space-y-3 pb-5">
-										<p className="text-sm leading-relaxed text-muted-foreground">
-											{item.penyelenggara}
+										<p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+											{item.deskripsi}
 										</p>
 										<div className="flex flex-wrap gap-1.5">
 											{item.tag.map((tag) => (

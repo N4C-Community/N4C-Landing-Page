@@ -1,40 +1,45 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { ErrorState } from "@/components/shared/ErrorState";
 import { PageShell } from "@/components/shared/PageShell";
 import { ShareButton } from "@/components/shared/ShareButton";
 import { Tag } from "@/components/shared/Tag";
-import { forumList, useForumById } from "@/lib/queries";
+import { eventList, useEventById } from "@/lib/queries";
 import { pageHead } from "@/lib/seo";
+import { formatDate } from "@/lib/utils";
 
-export const Route = createFileRoute("/forum/$id")({
+export const Route = createFileRoute("/event/index/$id")({
 	head: ({ params }) => {
-		const item = forumList.find((entry) => entry.id === params.id);
+		const item = eventList.find((entry) => entry.id === params.id);
 		return pageHead(
-			item?.judul ?? "Thread tidak ditemukan",
-			item?.isi ?? "Detail thread forum ITB Asia Community.",
+			item?.judul ?? "Event tidak ditemukan",
+			item?.deskripsi ?? "Detail event ITB Asia Community.",
+			item?.gambar,
 		);
 	},
-	component: ForumDetailPage,
+	component: EventDetailPage,
 });
 
-function ForumDetailPage() {
+function EventDetailPage() {
 	const { id } = Route.useParams();
-	const query = useForumById(id);
+	const query = useEventById(id);
 	const item = query.data;
 
 	if (query.isLoading) {
 		return (
 			<PageShell title="Memuat...">
-				<p className="text-sm text-muted-foreground">Memuat thread...</p>
+				<p className="text-sm text-muted-foreground">
+					Memuat detail event...
+				</p>
 			</PageShell>
 		);
 	}
 
 	if (query.isError) {
 		return (
-			<PageShell title="Forum">
+			<PageShell title="Event">
 				<ErrorState onRetry={() => void query.refetch()} />
 			</PageShell>
 		);
@@ -44,7 +49,7 @@ function ForumDetailPage() {
 		return (
 			<PageShell title="Tidak ditemukan">
 				<ErrorState
-					title="Thread tidak ditemukan"
+					title="Event tidak ditemukan"
 					description="Item ini tidak ada di data dummy."
 				/>
 			</PageShell>
@@ -54,35 +59,30 @@ function ForumDetailPage() {
 	return (
 		<PageShell
 			title={item.judul}
+			description={item.deskripsi}
 			actions={<ShareButton title={item.judul} />}
 		>
-			<Card>
-				<CardHeader>
-					<p className="text-sm text-muted-foreground">
-						Oleh{" "}
-						<Link
-							to="/member/$id"
-							params={{ id: item.author }}
-							className="underline-offset-4 hover:underline"
-						>
-							{item.authorNama}
-						</Link>
-						{" · "}
-						{item.replyCount} reply
-					</p>
+			<Card className="overflow-hidden py-0">
+				<img
+					src={item.gambar}
+					alt={item.judul}
+					className="aspect-[16/8] w-full object-cover"
+				/>
+				<CardHeader className="flex flex-row flex-wrap items-center gap-2 pt-5">
+					<Badge variant="secondary">{item.kategori}</Badge>
 				</CardHeader>
-				<CardContent className="space-y-4">
-					<p className="text-sm leading-relaxed">{item.isi}</p>
+				<CardContent className="space-y-4 pb-6">
+					<p className="text-sm text-muted-foreground">
+						{formatDate(item.tanggal)} · {item.lokasi}
+					</p>
+					<p className="text-sm leading-relaxed">{item.deskripsi}</p>
 					<div className="flex flex-wrap gap-1">
 						{item.tag.map((tag) => (
 							<Tag key={tag} label={tag} />
 						))}
 					</div>
-					<div className="rounded-lg border border-dashed border-border px-4 py-6 text-sm text-muted-foreground">
-						Reply coming soon
-					</div>
 					<Button asChild variant="outline">
-						<Link to="/forum">Kembali ke list</Link>
+						<Link to="/event">Kembali ke list</Link>
 					</Button>
 				</CardContent>
 			</Card>

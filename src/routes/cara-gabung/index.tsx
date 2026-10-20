@@ -10,7 +10,7 @@ import { PageShell } from "@/components/shared/PageShell";
 import { COMMUNITY_NAME, KAMPUS, WA_GROUP_LINK } from "@/lib/constants";
 import { pageHead } from "@/lib/seo";
 
-export const Route = createFileRoute("/cara-gabung")({
+export const Route = createFileRoute("/cara-gabung/")({
 	head: () =>
 		pageHead(
 			"Cara Gabung",
@@ -89,7 +89,9 @@ function CaraGabungPage() {
 
 			<div className="mt-8 flex flex-col gap-3 rounded-xl border border-border bg-card px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6">
 				<div className="space-y-1">
-					<p className="font-heading text-[15px] font-medium">Siap masuk grup?</p>
+					<p className="font-heading text-[15px] font-medium">
+						Siap masuk grup?
+					</p>
 					<p className="text-sm text-muted-foreground">
 						Gabung WhatsApp {COMMUNITY_NAME}, lalu perkenalkan diri.
 					</p>

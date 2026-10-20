@@ -8,33 +8,42 @@ import { FilterToolbar } from "@/components/shared/FilterToolbar";
 import { PageShell } from "@/components/shared/PageShell";
 import { Pagination } from "@/components/shared/Pagination";
 import { SearchBar } from "@/components/shared/SearchBar";
+import { SortSelect } from "@/components/shared/SortSelect";
 import { StaggerGrid } from "@/components/shared/StaggerGrid";
 import { Tag } from "@/components/shared/Tag";
 import { useSearch } from "@/hooks/useSearch";
-import { useShowcase } from "@/lib/queries";
+import { useFreelance } from "@/lib/queries";
 import { pageHead } from "@/lib/seo";
+import type { Freelance } from "@/lib/types";
+import { formatDate } from "@/lib/utils";
 
-export const Route = createFileRoute("/showcase")({
+export const Route = createFileRoute("/freelance/")({
 	head: () =>
 		pageHead(
-			"Showcase",
-			"Karya dan project kolaborasi member ITB Asia Community.",
+			"Freelance",
+			"Info pekerjaan lepas dari sesama mahasiswa ITB Asia Community.",
 		),
-	component: ShowcasePage,
+	component: FreelancePage,
 });
 
-function ShowcasePage() {
-	const query = useShowcase();
+function FreelancePage() {
+	const query = useFreelance();
 	const data = query.data ?? [];
 	const search = useSearch(data, {
 		searchKeys: ["judul", "deskripsi"],
 		filterKey: "kategori",
+		sortFns: {
+			terbaru: (a: Freelance, b: Freelance) => b.id.localeCompare(a.id),
+			deadline: (a: Freelance, b: Freelance) =>
+				a.deadline.localeCompare(b.deadline),
+		},
+		defaultSort: "terbaru",
 	});
 
 	return (
 		<PageShell
-			title="Showcase"
-			description="Project member komunitas. Filter kategori dan lihat detail karyanya."
+			title="Freelance"
+			description="Pekerjaan lepas dari komunitas. Cari, filter, dan urutkan deadline."
 		>
 			<FilterToolbar>
 				<SearchBar value={search.query} onChange={search.setQuery} />
@@ -43,6 +52,14 @@ function ShowcasePage() {
 					value={search.category}
 					onChange={search.setCategory}
 				/>
+				<SortSelect
+					value={search.sort}
+					onChange={search.setSort}
+					options={[
+						{ value: "terbaru", label: "Terbaru" },
+						{ value: "deadline", label: "Deadline terdekat" },
+					]}
+				/>
 			</FilterToolbar>
 			{query.isLoading ? (
 				<CardSkeleton />
@@ -50,7 +67,7 @@ function ShowcasePage() {
 				<ErrorState onRetry={() => void query.refetch()} />
 			) : search.total === 0 ? (
 				<EmptyState
-					description="Tidak ada project yang cocok."
+					description="Tidak ada freelance yang cocok dengan pencarian."
 					ctaLabel="Reset filter"
 					onCta={() => {
 						search.setQuery("");
@@ -63,7 +80,7 @@ function ShowcasePage() {
 						{search.results.map((item) => (
 							<Link
 								key={item.id}
-								to="/showcase/$id"
+								to="/freelance/$id"
 								params={{ id: item.id }}
 								className="block h-full"
 							>
@@ -73,13 +90,18 @@ function ShowcasePage() {
 										alt={item.judul}
 										className="aspect-[16/10] w-full object-cover"
 									/>
-									<CardHeader className="gap-1.5 pt-4">
-										<CardTitle className="line-clamp-1 text-[15px] leading-snug">
+									<CardHeader className="gap-2 pt-4">
+										<div className="flex items-center justify-between gap-3">
+											<span className="text-[11px] font-medium tracking-wide text-muted-foreground uppercase">
+												{item.kategori}
+											</span>
+											<span className="text-xs tabular-nums text-muted-foreground">
+												{formatDate(item.deadline)}
+											</span>
+										</div>
+										<CardTitle className="line-clamp-2 text-[15px] leading-snug">
 											{item.judul}
 										</CardTitle>
-										<p className="text-xs text-muted-foreground">
-											{item.pembuatNama}
-										</p>
 									</CardHeader>
 									<CardContent className="mt-auto space-y-3 pb-5">
 										<p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">

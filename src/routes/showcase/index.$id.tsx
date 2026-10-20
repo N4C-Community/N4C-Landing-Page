@@ -9,7 +9,7 @@ import { Tag } from "@/components/shared/Tag";
 import { showcaseList, useShowcaseById } from "@/lib/queries";
 import { pageHead } from "@/lib/seo";
 
-export const Route = createFileRoute("/showcase/$id")({
+export const Route = createFileRoute("/showcase/index/$id")({
 	head: ({ params }) => {
 		const item = showcaseList.find((entry) => entry.id === params.id);
 		return pageHead(

@@ -21,7 +21,7 @@ import { useForum } from "@/lib/queries";
 import { pageHead } from "@/lib/seo";
 import type { ForumThread } from "@/lib/types";
 
-export const Route = createFileRoute("/forum")({
+export const Route = createFileRoute("/forum/")({
 	head: () =>
 		pageHead(
 			"Forum",

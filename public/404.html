@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Redirecting...</title>
+		<script type="text/javascript">
+			var pathSegmentsToKeep = 0;
+
+			var isProjectPage = 0;
+
+			var l = window.location;
+			l.replace(
+				l.protocol +
+					"//" +
+					l.host +
+					(isProjectPage
+						? "/" + l.pathname.split("/").slice(1, 2).join("/")
+						: "") +
+					"/?/" +
+					l.pathname
+						.slice(1)
+						.split("/")
+						.slice(isProjectPage ? 1 : 0)
+						.join("/")
+						.replace(/&/g, "~and~") +
+					(l.search
+						? "&" + l.search.slice(1).replace(/&/g, "~and~")
+						: "") +
+					l.hash,
+			);
+		</script>
+	</head>
+	<body></body>
+</html>

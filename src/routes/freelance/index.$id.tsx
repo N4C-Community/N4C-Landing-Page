@@ -11,7 +11,7 @@ import { freelanceList, useFreelanceById } from "@/lib/queries";
 import { pageHead } from "@/lib/seo";
 import { formatDate } from "@/lib/utils";
 
-export const Route = createFileRoute("/freelance/$id")({
+export const Route = createFileRoute("/freelance/index/$id")({
 	head: ({ params }) => {
 		const item = freelanceList.find((entry) => entry.id === params.id);
 		return pageHead(

@@ -18,7 +18,7 @@ import { pageHead } from "@/lib/seo";
 import type { Event } from "@/lib/types";
 import { formatDate } from "@/lib/utils";
 
-export const Route = createFileRoute("/event")({
+export const Route = createFileRoute("/event/")({
 	head: () =>
 		pageHead("Event", "Workshop, meetup, dan webinar komunitas ITB Asia."),
 	component: EventPage,
