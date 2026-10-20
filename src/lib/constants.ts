@@ -3,9 +3,9 @@ export const COMMUNITY_NAME = "N4C Community";
 export const TAGLINE = "Kolaborasi Mahasiswa Lintas Jurusan";
 export const KAMPUS = "N4C Malang";
 export const DUMMY_PARTNER_COUNT = 8;
-export const SITE_URL = "https://itbasia.community";
+export const SITE_URL = "https://n4c.sryze.cc";
 export const OG_IMAGE =
-	"https://placehold.co/1200x630/1a1a1a/ffffff?text=ITB+Asia+Community";
+	"https://placehold.co/1200x630/1a1a1a/ffffff?text=N4C+Community";
 
 export const MEMBER_WA: Record<string, string> = {
 	"mbr-001": "6281234567890",

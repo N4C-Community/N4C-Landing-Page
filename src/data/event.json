@@ -11,7 +11,7 @@
 	},
 	{
 		"id": "ev-002",
-		"judul": "Meetup Komunitas ITB Asia",
+		"judul": "Meetup Komunitas N4C",
 		"tanggal": "2026-10-28",
 		"lokasi": "Kafe Kopi Senja, Malang",
 		"kategori": "Meetup",
@@ -33,7 +33,7 @@
 		"id": "ev-004",
 		"judul": "Workshop Git & GitHub",
 		"tanggal": "2026-11-12",
-		"lokasi": "Lab Komputer ITB Asia",
+		"lokasi": "Lab Komputer N4C",
 		"kategori": "Workshop",
 		"tag": ["git", "coding"],
 		"deskripsi": "Belajar kolaborasi kode dengan Git.",

@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/sheet";
 import { COMMUNITY_NAME, NAV_LINKS, WA_GROUP_LINK } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import faviconSVG from "@/assets/favicon.svg"
 
 function isActivePath(pathname: string, to: string): boolean {
 	if (to === "/") {
@@ -47,8 +48,8 @@ export function Navbar() {
 		>
 			<nav className="mx-auto flex h-16 max-w-6xl items-center gap-6 px-4">
 				<Link to="/" className="flex shrink-0 items-center gap-2.5">
-					<span className="flex size-8 items-center justify-center rounded-md bg-foreground text-[11px] font-semibold tracking-tight text-background">
-						IA
+					<span className="flex size-8 items-center justify-center rounded-md overflow-hidden">
+						<img src={faviconSVG} alt="N4C Icon" />
 					</span>
 					<span className="font-heading text-sm font-semibold tracking-tight">
 						{COMMUNITY_NAME}

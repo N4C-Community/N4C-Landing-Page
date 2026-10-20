@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://itbasia.community/sitemap.xml
+Sitemap: https://n4c.sryze.cc/sitemap.xml

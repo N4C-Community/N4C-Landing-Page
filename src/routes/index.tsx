@@ -214,7 +214,7 @@ function HomePage() {
 							className="max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base"
 						>
 							Wadah kolaborasi mahasiswa lintas jurusan untuk membangun
-							bisnis bersama — info freelance, lomba, event, dan showcase
+							bisnis bersama info freelance, lomba, event, dan showcase
 							project.
 						</motion.p>
 						<motion.div
@@ -345,7 +345,7 @@ function HomePage() {
 							</h3>
 							<p className="mt-2 text-sm leading-relaxed text-muted-foreground">
 								Menjadi wadah kolaborasi mahasiswa lintas jurusan untuk
-								membangun bisnis, karya, dan karier bersama — di luar
+								membangun bisnis, karya, dan karier bersama di luar
 								info internal kampus.
 							</p>
 						</div>

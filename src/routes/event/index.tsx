@@ -20,7 +20,7 @@ import { formatDate } from "@/lib/utils";
 
 export const Route = createFileRoute("/event/")({
 	head: () =>
-		pageHead("Event", "Workshop, meetup, dan webinar komunitas ITB Asia."),
+		pageHead("Event", "Workshop, meetup, dan webinar komunitas N4C."),
 	component: EventPage,
 });
 

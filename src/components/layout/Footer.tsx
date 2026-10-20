@@ -7,6 +7,7 @@ import {
 	TAGLINE,
 	WA_GROUP_LINK,
 } from "@/lib/constants";
+import faviconSVG from "@/assets/favicon.svg"
 
 export function Footer() {
 	const year = new Date().getFullYear();
@@ -16,8 +17,8 @@ export function Footer() {
 			<div className="mx-auto grid max-w-6xl gap-12 px-4 py-14 md:grid-cols-[1.5fr_1fr_1fr]">
 				<div>
 					<Link to="/" className="inline-flex items-center gap-2.5">
-						<span className="flex size-8 items-center justify-center rounded-md bg-foreground text-[11px] font-semibold tracking-tight text-background">
-							IA
+						<span className="flex size-8 items-center justify-center rounded-md overflow-hidden">
+							<img src={faviconSVG} alt="N4C Icon" />
 						</span>
 						<p className="font-heading text-sm font-semibold">
 							{COMMUNITY_NAME}
